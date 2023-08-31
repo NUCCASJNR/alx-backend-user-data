@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+"""Contains a filtering function"""
 import re
 from typing import List
 
