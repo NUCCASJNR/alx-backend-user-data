@@ -6,7 +6,7 @@ from typing import List
 
 
 def filter_datum(fields: List[str], redaction: str,
-                 message: str, separator: str):
+                 message: str, separator: str) -> str:
     """
     Obfuscates the sensitive fields in a log message.
     """
