@@ -67,7 +67,7 @@ def get_logger() -> logging.Logger:
 
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
-    """creates a secured connection"""
+    """:returns a secured connection"""
     connection = mysql.connector.connect(
         host=HOST,
         user=USERNAME,
