@@ -5,7 +5,7 @@ import bcrypt
 
 def hash_password(password: str) -> bytes:
     """
-    :param password:
+    Generates a hashed password
     :return:
             A salted hashed password
     """
