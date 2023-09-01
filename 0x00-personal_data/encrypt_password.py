@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+"""Contains a function for generating hashed passwords"""
 import bcrypt
 
 
