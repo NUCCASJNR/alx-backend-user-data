@@ -75,3 +75,24 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         database=DATABASE
     )
     return connection
+
+
+def main() -> None:
+    """"
+    Main function that returns nothing
+    """
+    connection = get_db()
+    # Create the cursor object
+    cursor = connection.cursor()
+    # Perform query
+    cursor.execute("SELECT * FROM users")
+    selected_rows = cursor.fetchall()
+    logger = get_logger()
+    for row in selected_rows:
+        print(row)
+    cursor.close()
+    connection.close()
+
+
+if __name__ == "__main__":
+    main()

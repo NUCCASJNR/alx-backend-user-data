@@ -12,7 +12,7 @@ print(end - start)
 
 print(salt)
 print(hashed)
-
+print(hashed)
 if bcrypt.checkpw(passwd, hashed):
     print("Match")
 else:
