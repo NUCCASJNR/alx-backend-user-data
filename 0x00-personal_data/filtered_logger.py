@@ -4,8 +4,15 @@
 import logging
 import re
 from typing import List
+from os import getenv
+import mysql.connector
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
+
+USERNAME = getenv("PERSONAL_DATA_DB_USERNAME")
+PASSWORD = getenv("PERSONAL_DATA_DB_PASSWORD")
+HOST = getenv("PERSONAL_DATA_DB_HOST")
+DATABASE = getenv("PERSONAL_DATA_DB_NAME")
 
 
 class RedactingFormatter(logging.Formatter):
@@ -57,3 +64,14 @@ def get_logger() -> logging.Logger:
     stream_handler.setFormatter(formatter)
     logger.addHandler(stream_handler)
     return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """creates a secured connection"""
+    connection = mysql.connector.connect(
+        host=HOST,
+        user=USERNAME,
+        password=PASSWORD,
+        database=DATABASE
+    )
+    return connection
