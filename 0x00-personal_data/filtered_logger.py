@@ -9,11 +9,6 @@ import mysql.connector
 
 PII_FIELDS: Tuple = ("name", "email", "phone", "ssn", "password")
 
-USERNAME: str = getenv("PERSONAL_DATA_DB_USERNAME")
-PASSWORD: str = getenv("PERSONAL_DATA_DB_PASSWORD")
-HOST: str = getenv("PERSONAL_DATA_DB_HOST")
-DATABASE: str = getenv("PERSONAL_DATA_DB_NAME")
-
 
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
@@ -68,10 +63,15 @@ def get_logger() -> logging.Logger:
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
     """:returns a secured connection"""
+    username: str = getenv("PERSONAL_DATA_DB_USERNAME")
+    password: str = getenv("PERSONAL_DATA_DB_PASSWORD")
+    host: str = getenv("PERSONAL_DATA_DB_HOST")
+    database: str = getenv("PERSONAL_DATA_DB_NAME")
+
     connection = mysql.connector.connect(
-        host=HOST,
-        user=USERNAME,
-        password=PASSWORD,
-        database=DATABASE
+        host=host,
+        user=username,
+        password=password,
+        database=database
     )
     return connection
