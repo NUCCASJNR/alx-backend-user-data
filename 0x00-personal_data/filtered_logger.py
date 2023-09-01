@@ -3,17 +3,16 @@
 
 import logging
 import re
-from typing import List
+from typing import List, Tuple
 from os import getenv
 import mysql.connector
 
-PII_FIELDS = ("name", "email", "phone", "ssn", "password")
+PII_FIELDS: Tuple = ("name", "email", "phone", "ssn", "password")
 
-USERNAME = getenv("PERSONAL_DATA_DB_USERNAME")
-PASSWORD = getenv("PERSONAL_DATA_DB_PASSWORD")
-HOST = getenv("PERSONAL_DATA_DB_HOST")
-DATABASE = getenv("PERSONAL_DATA_DB_NAME")
-# print(f"{USERNAME} {PASSWORD} {HOST} {DATABASE}")
+USERNAME: str = getenv("PERSONAL_DATA_DB_USERNAME")
+PASSWORD: str = getenv("PERSONAL_DATA_DB_PASSWORD")
+HOST: str = getenv("PERSONAL_DATA_DB_HOST")
+DATABASE: str = getenv("PERSONAL_DATA_DB_NAME")
 
 
 class RedactingFormatter(logging.Formatter):
