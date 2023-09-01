@@ -13,6 +13,7 @@ USERNAME = getenv("PERSONAL_DATA_DB_USERNAME")
 PASSWORD = getenv("PERSONAL_DATA_DB_PASSWORD")
 HOST = getenv("PERSONAL_DATA_DB_HOST")
 DATABASE = getenv("PERSONAL_DATA_DB_NAME")
+# print(f"{USERNAME} {PASSWORD} {HOST} {DATABASE}")
 
 
 class RedactingFormatter(logging.Formatter):
