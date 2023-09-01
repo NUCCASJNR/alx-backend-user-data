@@ -3,7 +3,7 @@
 import bcrypt
 
 
-def hash_password(password: str) -> bcrypt.gensalt:
+def hash_password(password: str) -> bytes:
     """
     :param password:
     :return:
