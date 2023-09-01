@@ -15,3 +15,16 @@ def hash_password(password: str) -> bytes:
     salt = bcrypt.gensalt()
     hashed = bcrypt.hashpw(encoded, salt)
     return hashed
+
+
+def is_valid(hashed_password: bytes, password: str) -> bool:
+    """
+    :param hashed_password:
+    :param password:
+    :return:
+        TRue or False
+    """
+    encoded = password.encode("utf-8")
+    if bcrypt.checkpw(encoded, hashed_password):
+        return True
+    return False
