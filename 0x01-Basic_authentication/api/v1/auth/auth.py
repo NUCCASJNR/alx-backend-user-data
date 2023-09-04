@@ -12,7 +12,7 @@ class Auth:
     """
     User auth
     """
-    def require_auth(self, path: str, excluded_paths: List[str]) -> False:
+    def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """
         Handles path
         :param path:
@@ -20,7 +20,19 @@ class Auth:
         :return:
             False-Path
         """
-        return False
+        if not path:
+            return True
+        if not excluded_paths or excluded_paths == []:
+            return True
+        if path in excluded_paths:
+            return False
+        normalized_path = path.rstrip('/')  # Remove trailing slashes
+        for paths in excluded_paths:
+            # Remove trailing slashes
+            normalized_excluded_path = paths.rstrip('/')
+            if normalized_path == normalized_excluded_path:
+                return False
+        return True
 
     def authorization_header(self, request=None) -> str:
         """
