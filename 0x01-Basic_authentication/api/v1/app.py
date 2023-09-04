@@ -6,9 +6,8 @@ from os import getenv
 from typing import Tuple
 
 from api.v1.views import app_views
-from flask import Flask, jsonify, abort, request, Response
+from flask import Flask, jsonify,  Response
 from flask_cors import (CORS, cross_origin)
-import os
 
 
 app = Flask(__name__)
@@ -17,7 +16,7 @@ CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 
 @app.errorhandler(404)
-def not_found(error) -> tuple[Response, int]:
+def not_found(error) -> Tuple[Response, int]:
     """ Not found handler
     """
     return jsonify({"error": "Not found"}), 404
