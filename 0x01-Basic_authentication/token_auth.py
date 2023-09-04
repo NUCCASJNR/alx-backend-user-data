@@ -20,6 +20,17 @@ def verify_token(token):
         return tokens[token]
 
 
+@auth.get_user_roles
+def get_user_roles(user):
+    return user.get_roles()
+
+
+@app.route('/admin')
+@auth.login_required(role='admin')
+def admins_only():
+    return "Hello {}, you are an admin!".format(auth.current_user())
+
+
 @app.route('/')
 @auth.login_required
 def index():
@@ -27,4 +38,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
