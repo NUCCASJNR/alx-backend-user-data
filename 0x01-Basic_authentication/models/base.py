@@ -7,7 +7,6 @@ from os import path
 import json
 import uuid
 
-
 TIMESTAMP_FORMAT = "%Y-%m-%dT%H:%M:%S"
 DATA = {}
 
@@ -45,7 +44,7 @@ class Base():
         return (self.id == other.id)
 
     def to_json(self, for_serialization: bool = False) -> dict:
-        """ Convert the object a JSON dictionary
+        """ Convert the object to a JSON dictionary
         """
         result = {}
         for key, value in self.__dict__.items():
@@ -64,13 +63,16 @@ class Base():
         s_class = cls.__name__
         file_path = ".db_{}.json".format(s_class)
         DATA[s_class] = {}
-        if not path.exists(file_path):
-            return
 
-        with open(file_path, 'r') as f:
-            objs_json = json.load(f)
-            for obj_id, obj_json in objs_json.items():
-                DATA[s_class][obj_id] = cls(**obj_json)
+        try:
+            with open(file_path, 'r') as f:
+                objs_json = json.load(f)
+                for obj_id, obj_json in objs_json.items():
+                    DATA[s_class][obj_id] = cls(**obj_json)
+        except FileNotFoundError:
+            print(f"File not found: {file_path}")
+        except json.JSONDecodeError as e:
+            print(f"JSON decoding error: {e}")
 
     @classmethod
     def save_to_file(cls):
@@ -126,6 +128,7 @@ class Base():
         """ Search all objects with matching attributes
         """
         s_class = cls.__name__
+
         def _search(obj):
             if len(attributes) == 0:
                 return True
@@ -133,5 +136,5 @@ class Base():
                 if (getattr(obj, k) != v):
                     return False
             return True
-        
+
         return list(filter(_search, DATA[s_class].values()))
