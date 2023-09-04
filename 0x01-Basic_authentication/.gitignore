@@ -3,3 +3,7 @@ api/__pycache__/
 api/v1/__pycache__/
 api/v1/views/__pycache__/
 models/__pycache__/
+models/.DS_Store
+api/.DS_Store
+api/v1/.DS_Store
+api/v1/views/.DS_Store
