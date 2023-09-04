@@ -7,7 +7,6 @@ from os import path
 import json
 import uuid
 
-
 TIMESTAMP_FORMAT = "%Y-%m-%dT%H:%M:%S"
 DATA = {}
 
