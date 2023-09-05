@@ -27,7 +27,7 @@ def not_found(error) -> str:
 
 
 @app.errorhandler(401)
-def unauthorized(error):
+def unauthorized(error) -> str:
     """
     handles Unauthorized requests
     :type error: object
@@ -38,7 +38,7 @@ def unauthorized(error):
 
 
 @app.errorhandler(403)
-def forbidden(error):
+def forbidden(error) -> str:
     """
     Handles 403 forbidden error
     :param error:
