@@ -27,7 +27,7 @@ def not_found(error) -> str:
 
 
 @app.errorhandler(401)
-def unauthorized(error):
+def unauthorized(error) -> str:
     """
     handles Unauthorized requests
     :type error: object
