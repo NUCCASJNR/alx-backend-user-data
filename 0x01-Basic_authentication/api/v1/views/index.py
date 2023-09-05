@@ -36,7 +36,7 @@ def unauthorized() -> None:
 
 
 @app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
-def forbidden() -> str:
+def forbidden() -> None:
     """
     forbidden route
     :return: 403 HTTP error
