@@ -20,7 +20,7 @@ if auth_type == "auth":
 
 
 @app.errorhandler(404)
-def not_found(error) -> tuple[Response, int]:
+def not_found(error) -> str:
     """ Not found handler
     """
     return jsonify({"error": "Not found"}), 404
