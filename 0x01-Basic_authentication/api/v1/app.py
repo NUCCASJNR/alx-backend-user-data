@@ -14,7 +14,6 @@ app.register_blueprint(app_views)
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 auth = None
 auth_type = getenv("AUTH_TYPE", "auth")
-print(auth_type)
 if auth_type == "auth":
     from api.v1.auth.auth import Auth
     auth = Auth()
@@ -39,7 +38,7 @@ def unauthorized(error):
 
 
 @app.errorhandler(403)
-def forbidden(error: str):
+def forbidden(error):
     """
     Handles 403 forbidden error
     :param error:
