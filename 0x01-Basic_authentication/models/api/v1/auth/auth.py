@@ -42,11 +42,12 @@ class Auth:
         :return:
             The Authentication header else None
         """
-        if request is None:
+        if not request:
             return None
         if 'Authorization' in request.headers:
             return request.headers['Authorization']
         return None
+
 
     def current_user(self, request=None) -> TypeVar('User'):
         """

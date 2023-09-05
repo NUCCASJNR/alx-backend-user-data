@@ -3,10 +3,8 @@
 Route module for the API
 """
 from os import getenv
-from typing import Tuple
-
 from api.v1.views import app_views
-from flask import Flask, jsonify, abort, request, Response
+from flask import Flask, jsonify, abort, request
 from flask_cors import (CORS, cross_origin)
 import os
 
@@ -20,9 +18,8 @@ if auth:
     from api.v1.views.auth import Auth
     auth = Auth()
 
-
 @app.errorhandler(404)
-def not_found(error) -> tuple[Response, int]:
+def not_found(error) -> str:
     """ Not found handler
     """
     return jsonify({"error": "Not found"}), 404
@@ -32,7 +29,6 @@ def not_found(error) -> tuple[Response, int]:
 def unauthorized(error):
     """
     handles Unauthorized requests
-    :type error: object
     :param error:
     :return: 401 HTTP error
     """
@@ -48,7 +44,6 @@ def forbidden(error: str):
     """
     return jsonify({"error": "Forbidden"}), 403
 
-
 @app.before_request
 def before_request():
     """
@@ -61,11 +56,11 @@ def before_request():
     excluded_paths = ['/api/v1/status/',
                       '/api/v1/unauthorized/',
                       '/api/v1/forbidden/']
-    if auth.require_auth(request.path, excluded_paths):
+    if request.path not in auth.require_auth(request.path, excluded_paths):
         return
-    if auth.authorization_header(request) is None:
+    if not auth.authorization_header(request):
         abort(401)
-    if auth.current_user(request) is None:
+    if not auth.current_user(request):
         abort(403)
 
 
