@@ -9,4 +9,3 @@ class BasicAuth(Auth):
     """
     Basic Auth class
     """
-    pass
