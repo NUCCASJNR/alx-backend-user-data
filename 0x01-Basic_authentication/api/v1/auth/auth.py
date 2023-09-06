@@ -37,8 +37,6 @@ class Auth:
                 stripped = normalized_excluded_path.rstrip('*')
                 if stripped == normalized_path:
                     return False
-                if normalized_path == normalized_excluded_path:
-                    return False
         return True
 
     def authorization_header(self, request=None) -> str:
