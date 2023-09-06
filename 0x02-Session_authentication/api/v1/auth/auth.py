@@ -5,6 +5,7 @@ This module handles how users auth is being managed
 """
 
 from flask import request
+from os import getenv
 from typing import List, TypeVar
 
 
@@ -60,3 +61,17 @@ class Auth:
             None
         """
         return None
+
+    def session_cookie(self, request=None):
+        """
+        Gets the session cookie
+        :return:
+        :param request: cookie
+        :return:
+            None if request is None
+        """
+        if not request:
+            return None
+        session_id = getenv("SESSION_NAME", "_my_session_id")
+        cookie = request.cookies.get(session_id)
+        return cookie
