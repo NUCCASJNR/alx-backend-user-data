@@ -31,8 +31,11 @@ class Auth:
         for paths in excluded_paths:
             # Remove trailing slashes
             normalized_excluded_path = paths.rstrip('/')
-            if normalized_path == normalized_excluded_path and\
-                    normalized_excluded_path.endswith('*'):
+            if normalized_path == normalized_excluded_path:
+                return False
+            if normalized_excluded_path.endswith('*')\
+                    and normalized_excluded_path.rstrip('*')\
+                    == normalized_path:
                 return False
             if normalized_path == normalized_excluded_path:
                 return False
