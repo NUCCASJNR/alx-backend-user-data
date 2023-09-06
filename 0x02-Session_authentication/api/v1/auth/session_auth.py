@@ -27,3 +27,15 @@ class SessionAuth(Auth):
         generated_uid = str(uuid4())
         SessionAuth.user_id_by_session_id[generated_uid] = user_id
         return generated_uid
+
+    def user_id_for_session_id(self, session_id: str = None) -> str:
+        """
+        Finds the session_id for a user_id
+        :param session_id: session_id of a user
+        :return:
+            None if session_id is None
+            None if session_id is not a string
+        """
+        if not session_id or not isinstance(session_id, str):
+            return None
+        return SessionAuth.user_id_by_session_id.get(session_id)
