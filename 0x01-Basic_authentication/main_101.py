@@ -13,3 +13,8 @@ print(result1)  # False
 path_to_check2 = "/api/v1/stats/"
 result2 = auth.require_auth(path_to_check2, excluded_paths)
 print(result2)  # False
+
+check = "/api/v1/users"
+
+res = auth.require_auth(check, ["/api/v1/us*"])
+print(res)

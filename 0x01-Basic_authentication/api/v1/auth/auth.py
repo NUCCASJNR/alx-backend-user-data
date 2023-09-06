@@ -33,10 +33,11 @@ class Auth:
             normalized_excluded_path = paths.rstrip('/')
             if normalized_path == normalized_excluded_path:
                 return False
-            if normalized_excluded_path.endswith('*')\
-                    and normalized_excluded_path.rstrip('*')\
-                    == normalized_path:
-                return False
+            if normalized_excluded_path.endswith('*'):
+                stripped = normalized_excluded_path.rstrip('*')
+                if stripped == normalized_path:
+                    return False
+            return False
             if normalized_path == normalized_excluded_path:
                 return False
         return True
