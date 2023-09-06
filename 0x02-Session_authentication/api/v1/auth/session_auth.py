@@ -39,3 +39,13 @@ class SessionAuth(Auth):
         if not session_id or not isinstance(session_id, str):
             return None
         return SessionAuth.user_id_by_session_id.get(session_id)
+
+    def current_user(self, request=None):
+        """
+        Returns a user obj cookie
+        :param request: request obj
+        :return:
+            user's cookie
+        """
+        session_cookie = self.session_cookie(request)
+        user_id = self.user_id_by_session_id(session_cookie)

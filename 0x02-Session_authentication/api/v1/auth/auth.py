@@ -72,6 +72,6 @@ class Auth:
         """
         if not request:
             return None
-        session_id = getenv("SESSION_NAME", "_my_session_id_fake")
+        session_id = getenv("SESSION_NAME", "_my_session_id")
         cookie = request.cookies.get(session_id)
         return cookie
