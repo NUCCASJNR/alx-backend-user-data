@@ -4,6 +4,7 @@
 from api.v1.auth.auth import Auth
 from typing import Dict
 from uuid import uuid4
+from models.user import User
 
 
 class SessionAuth(Auth):
@@ -48,4 +49,5 @@ class SessionAuth(Auth):
             user's cookie
         """
         session_cookie = self.session_cookie(request)
-        user_id = self.user_id_by_session_id(session_cookie)
+        user_id = self.user_id_by_session_id.get(session_cookie)
+        return User.get(user_id)
