@@ -3,7 +3,7 @@
 """
 Contains All session Auth routes
 """
-from flask import jsonify, make_response, request
+from flask import jsonify, request
 from api.v1.views import app_views
 from models.user import User
 from os import getenv
