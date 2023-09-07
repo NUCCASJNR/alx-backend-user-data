@@ -25,7 +25,7 @@ def login_user():
         return jsonify({"error": "password missing"}), 400
     user = User.search({"email": email_form})
     if not user:
-        return jsonify({"error": "no user found for this email"}), 400
+        return jsonify({"error": "no user found for this email"}), 404
     if not user[0].is_valid_password(password_form):
         return jsonify({"error": "wrong password"}), 401
     from api.v1.app import auth
