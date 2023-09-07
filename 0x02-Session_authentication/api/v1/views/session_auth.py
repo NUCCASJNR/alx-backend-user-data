@@ -13,15 +13,15 @@ from os import getenv
                  strict_slashes=False)
 def login_user():
     """
-    Logs in a user if it meets all the requiremets
+    Logs in a user if it meets all the requirements
     :return:
     the user details
     """
     email_form = request.form.get('email')
-    if not email_form:
+    if not email_form or email_form == '':
         return jsonify({"error": "email missing"}), 400
     password_form = request.form.get('password')
-    if not password_form:
+    if not password_form or password_form == '':
         return jsonify({"error": "password missing"}), 400
     user = User.search({"email": email_form})
     if not user:
