@@ -18,10 +18,10 @@ def login_user():
     the user details
     """
     email_form = request.form.get('email')
-    if not email_form or email_form == '':
+    if not email_form:
         return jsonify({"error": "email missing"}), 400
     password_form = request.form.get('password')
-    if not password_form or password_form == '':
+    if not password_form:
         return jsonify({"error": "password missing"}), 400
     user = User.search({"email": email_form})
     if not user:
