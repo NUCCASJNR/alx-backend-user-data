@@ -67,5 +67,5 @@ class SessionAuth(Auth):
         linked = self.user_id_for_session_id(session_cookie)
         if not linked:
             return False
-        self.user_id_by_session_id.pop(session_cookie, None)
+        self.user_id_by_session_id.pop(session_cookie)
         return True
