@@ -51,3 +51,21 @@ class SessionAuth(Auth):
         session_cookie = self.session_cookie(request)
         user_id = self.user_id_by_session_id.get(session_cookie)
         return User.get(user_id)
+
+    def destroy_session(self, request=None):
+        """
+        Destroys a current session
+        :param request: request obj
+        :return:
+            The deleted cookie
+        """
+        if not request:
+            return False
+        session_cookie = self.session_cookie(request)
+        if not session_cookie:
+            return False
+        linked = self.user_id_for_session_id(session_cookie)
+        if not linked:
+            return False
+        self.user_id_by_session_id.pop(session_cookie, None)
+        return True

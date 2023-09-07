@@ -3,7 +3,7 @@
 """
 Contains All session Auth routes
 """
-from flask import jsonify, request
+from flask import abort, jsonify, request
 from api.v1.views import app_views
 from models.user import User
 from os import getenv
@@ -34,3 +34,19 @@ def login_user():
     session_id = auth.create_session(getattr(user[0], 'id'))
     res = resp.set_cookie(session_name, session_id)
     return resp
+
+
+@app_views.route('/api/v1/auth_session/logout', methods=['DELETE'],
+                 strict_slashes=False)
+def delete_session():
+    """
+    Deletes a session
+    :return:
+        {} if successful
+        else Abort 404
+    """
+    from api.v1.app import auth
+    session_to_be_deleted = auth.destroy_session(request)
+    if session_to_be_deleted:
+        return jsonify({}), 200
+    abort(404)
