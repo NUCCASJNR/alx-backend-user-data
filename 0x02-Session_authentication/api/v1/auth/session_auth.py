@@ -49,8 +49,11 @@ class SessionAuth(Auth):
             user's cookie
         """
         session_cookie = self.session_cookie(request)
-        user_id = self.user_id_by_session_id.get(session_cookie)
-        return User.get(user_id)
+        try:
+            user_id = self.user_id_for_session_id(session_cookie)
+            return User.get(user_id)
+        except KeyError:
+            return None
 
     def destroy_session(self, request=None):
         """
