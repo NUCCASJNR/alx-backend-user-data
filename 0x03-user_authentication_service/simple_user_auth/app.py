@@ -5,17 +5,26 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_user import UserManager, UserMixin
 from flask_login import LoginManager, login_user, login_required, logout_user
 from os import getenv
+from flask_mail import Mail, Message
 import bcrypt
 
 user = getenv("prep_user")
 pwd = getenv("prep_pwd")
 db_name = getenv("prep_db")
 host = getenv("prep_host")
+email = getenv("email")
+email_pwd = getenv("email_pwd")
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Hack_it_if_you_can221'
 app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqldb://{user}:{pwd}@{host}/{db_name}'
-app.config['USER_EMAIL_SENDER_EMAIL'] = 'alareefadegbite@gmail.com'
+app.config['USER_EMAIL_SENDER_EMAIL'] = email
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_PASSWORD'] = email_pwd
 db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
