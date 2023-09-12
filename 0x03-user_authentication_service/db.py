@@ -62,7 +62,7 @@ class DB:
             raise NoResultFound
         return query
 
-    def update_user(self, user_id: int, **kwargs) -> User:
+    def update_user(self, user_id: int, **kwargs) -> None:
         """
         Updates a user's detail
         :param user_id: user_id of the user to be updated
