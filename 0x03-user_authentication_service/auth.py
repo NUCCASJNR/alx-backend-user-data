@@ -22,7 +22,7 @@ def _hash_password(password: str) -> bytes:
     return hashed_pwd
 
 
-def _generate_uuid():
+def _generate_uuid() -> str:
     """
     Generates a unique_id
     :return:
