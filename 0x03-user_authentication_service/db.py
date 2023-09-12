@@ -70,11 +70,14 @@ class DB:
         :return:
             The updated user object
         """
-        user_to_update = self.find_user_by(id=user_id)
-        for key, value in kwargs.items():
-            if hasattr(User, key):
-                setattr(user_to_update, key, value)
-            else:
-                raise ValueError
-        self._session.commit()
-        return None
+        try:
+            user_to_update = self.find_user_by(id=user_id)
+            for key, value in kwargs.items():
+                if hasattr(user_to_update, key):
+                    setattr(user_to_update, key, value)
+                else:
+                    raise ValueError
+            self._session.commit()
+            return None
+        except Exception:
+            raise ValueError
