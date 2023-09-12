@@ -75,7 +75,7 @@ class Auth:
     def create_session(self, email: str) -> str:
         """
         Creates a session for a user
-        :param email: user email
+        :param email: email_address
         :return:
             user session_id
         """
