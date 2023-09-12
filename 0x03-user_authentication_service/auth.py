@@ -84,7 +84,7 @@ class Auth:
         except NoResultFound:
             return None
 
-    def get_user_from_session_id(self, session_id: str) -> User | None:
+    def get_user_from_session_id(self, session_id: str) -> User:
         """
         Retrieves a user from the database using the session_id
         :param session_id: user's session_id
@@ -93,7 +93,9 @@ class Auth:
         """
         if not session_id:
             return None
-        user = self._db.find_user_by(session_id=session_id)
-        if user:
-            return user
-        return None
+        try:
+            user = self._db.find_user_by(session_id=session_id)
+            if user:
+                return user
+        except NoResultFound:
+            return None
