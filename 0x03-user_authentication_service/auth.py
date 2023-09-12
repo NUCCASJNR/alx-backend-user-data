@@ -72,7 +72,7 @@ class Auth:
         except NoResultFound:
             return False
 
-    def create_session(self, email: str) -> str:
+    def create_session(self, email: str) -> str | None:
         """
         Create session
         """
