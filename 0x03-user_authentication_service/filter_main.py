@@ -12,9 +12,9 @@ from sqlalchemy.orm.exc import NoResultFound
 my_db = DB()
 
 user = my_db.add_user("test@test.com", "PwdHashed")
-print(user.id)
+print(user.email)
 
-find_user = my_db.find_user_by(email="test@test.com")
+find_user = my_db.find_user_by(id=1)
 print(find_user.id)
 
 try:

@@ -61,3 +61,20 @@ class DB:
         if not query:
             raise NoResultFound
         return query
+
+    def update_user(self, user_id: int, **kwargs) -> User:
+        """
+        Updates a user's detail
+        :param user_id: user_id of the user to be updated
+        :param kwargs: Arbitrary args
+        :return:
+            The updated user object
+        """
+        try:
+            user_to_update = self.find_user_by(id=user_id)
+            for key, value in kwargs.items():
+                setattr(user_to_update, key, value)
+            self._session.commit()
+            return None
+        except ValueError:
+            raise ValueError
