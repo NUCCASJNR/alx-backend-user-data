@@ -73,8 +73,11 @@ class DB:
         try:
             user_to_update = self.find_user_by(id=user_id)
             for key, value in kwargs.items():
-                setattr(user_to_update, key, value)
+                if hasattr(User, key):
+                    setattr(user_to_update, key, value)
+                else:
+                    raise ValueError
             self._session.commit()
             return None
-        except AttributeError:
+        except Exception:
             raise ValueError
