@@ -76,5 +76,5 @@ class DB:
                 setattr(user_to_update, key, value)
             self._session.commit()
             return None
-        except ValueError:
+        except AttributeError:
             raise ValueError
