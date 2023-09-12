@@ -9,7 +9,7 @@ from flask import (
 )
 from auth import Auth, NoResultFound
 app = Flask(__name__)
-auth = Auth()
+AUTH = Auth()
 
 
 @app.route('/')
@@ -29,10 +29,11 @@ def add_user():
     :return:
         The added user obj
     """
+
     email = request.form['email']
     password = request.form['password']
     try:
-        auth.register_user(email, password)
+        AUTH.register_user(email, password)
         return jsonify({"email": email, "message": "user created"})
     except ValueError:
         return jsonify({"message": "email already registered"}), 400
@@ -47,8 +48,8 @@ def login_user():
     """
     email = request.form['email']
     password = request.form['password']
-    if auth.valid_login(email, password):
-        created_id = auth.create_session(email)
+    if AUTH.valid_login(email, password):
+        created_id = AUTH.create_session(email)
         resp = jsonify({"email": email, "message": "logged in"})
         resp.set_cookie("session_id", created_id)
         return resp
