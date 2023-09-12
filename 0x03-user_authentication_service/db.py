@@ -2,6 +2,8 @@
 
 """DB module
 """
+from typing import Type
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
@@ -46,7 +48,7 @@ class DB:
         self._session.commit()
         return user_obj
 
-    def find_user_by(self, **kwargs) -> User:
+    def find_user_by(self, **kwargs) -> Type[User]:
         """
         Queries the database and returns the match if found
         :param kwargs: Arbitrary args
