@@ -7,7 +7,7 @@ Flask App
 from flask import (
     abort, Flask, jsonify, request, Response
 )
-from auth import Auth, NoResultFound
+from auth import Auth
 app = Flask(__name__)
 AUTH = Auth()
 

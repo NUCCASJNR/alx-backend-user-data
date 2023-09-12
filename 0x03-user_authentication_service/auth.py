@@ -7,7 +7,7 @@ Authentication Module
 import bcrypt
 
 from db import DB, User, NoResultFound
-from uuid import uuid4
+import uuid
 
 
 def _hash_password(password: str) -> bytes:
@@ -28,7 +28,7 @@ def _generate_uuid() -> str:
     :return:
         The generated id
     """
-    generated_id = str(uuid4())
+    generated_id = str(uuid.uuid4())
     return generated_id
 
 
