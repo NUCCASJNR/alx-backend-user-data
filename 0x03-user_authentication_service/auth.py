@@ -7,6 +7,7 @@ Authentication Module
 import bcrypt
 
 from db import DB, User, NoResultFound
+from uuid import uuid4
 
 
 def _hash_password(password: str) -> bytes:
@@ -19,6 +20,16 @@ def _hash_password(password: str) -> bytes:
     salt = bcrypt.gensalt(rounds=12)
     hashed_pwd = bcrypt.hashpw(password.encode('utf-8'), salt)
     return hashed_pwd
+
+
+def _generate_uuid():
+    """
+    Generates a unique_id
+    :return:
+        The generated id
+    """
+    generated_id = str(uuid4())
+    return generated_id
 
 
 class Auth:
