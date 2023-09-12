@@ -8,8 +8,6 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import InvalidRequestError
-from typing import Type
-
 from user import Base, User
 
 
@@ -49,7 +47,7 @@ class DB:
         self._session.commit()
         return user_obj
 
-    def find_user_by(self, **kwargs) -> Type[User]:
+    def find_user_by(self, **kwargs) -> User:
         """
         Queries the database and returns the match if found
         :param kwargs: Arbitrary args
