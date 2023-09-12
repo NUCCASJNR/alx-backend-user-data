@@ -114,4 +114,4 @@ class Auth:
             user.session_id = None
             return None
         except NoResultFound:
-            pass
+            return None
