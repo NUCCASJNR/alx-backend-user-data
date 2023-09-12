@@ -85,4 +85,4 @@ class Auth:
             user.session_id = session_id
             return session_id
         except NoResultFound:
-            return None
+            return
