@@ -145,6 +145,7 @@ class Auth:
             hashed_pwd = _hash_password(password)
             self._db.update_user(token.id, password=hashed_pwd,
                                  reset_token=None)
-            return None
+            if not token:
+                return None
         except Exception:
             raise ValueError
