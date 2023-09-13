@@ -65,7 +65,7 @@ def logout_user() -> Response:
     :return:
         redirect to the '/' route
     """
-    session_id = request.cookies['session_id']
+    session_id = request.cookies.get('session_id')
     find_user = AUTH.get_user_from_session_id(session_id)
     if not find_user:
         abort(403)
