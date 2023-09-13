@@ -131,3 +131,20 @@ class Auth:
             return token
         except Exception:
             raise ValueError
+
+    def update_password(self, reset_token: str, password: str) -> None:
+        """
+        Updates a user pwd
+        :param reset_token: user reset token
+        :param password: user pwd
+        :return:
+            None
+        """
+        try:
+            token = self._db.find_user_by(reset_token=reset_token)
+            hashed_pwd = _hash_password(password)
+            self._db.update_user(token.id, password=hashed_pwd,
+                                 reset_token=None)
+            return None
+        except Exception:
+            raise ValueError
