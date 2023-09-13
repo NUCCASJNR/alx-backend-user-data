@@ -111,7 +111,7 @@ class Auth:
             return None
         try:
             self._db.update_user(user_id, session_id=None)
-        except ValueError:
+        except NoResultFound:
             return None
 
     def get_reset_password_token(self, email: str) -> str:
