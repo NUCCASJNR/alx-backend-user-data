@@ -5,9 +5,9 @@ Flask App
 """
 
 from flask import (
-    abort, Flask, jsonify, redirect, request, Response
+    abort, Flask, jsonify, redirect, request, Response, make_response
 )
-from auth import Auth, NoResultFound
+from auth import Auth
 app = Flask(__name__)
 AUTH = Auth()
 
@@ -63,7 +63,7 @@ def logout_user():
     :return:
         redirect to the '/' route
     """
-    session_id = request.form['session_id']
+    session_id = request.cookies['session_id']
     if session_id:
         find_user = AUTH.get_user_from_session_id(session_id)
         if find_user:
