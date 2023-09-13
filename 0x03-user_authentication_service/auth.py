@@ -45,7 +45,7 @@ class Auth:
         :param email: User's email address
         :param password: User's password
         :return:
-            Registered user obj
+            Registered user object
         """
         try:
             user = self._db.find_user_by(email=email)
