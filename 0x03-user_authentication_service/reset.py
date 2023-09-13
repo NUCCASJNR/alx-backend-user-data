@@ -38,7 +38,7 @@ print("Session destroyed")
 
 # Test the get_reset_password_token method
 try:
-    reset_token = auth.get_reset_password_token("test@examle.com")
+    reset_token = auth.get_reset_password_token("test@example.com")
     print(f"Reset token generated: {reset_token}")
 except ValueError as e:
     print(f"Error: {e}")
