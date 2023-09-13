@@ -95,13 +95,11 @@ def get_reset_password_token():
         message
     """
     email = request.form.get('email')
-    pwd = request.form.get('password')
-    if AUTH.register_user(email, pwd):
-        AUTH.get_reset_password_token(email)
-        return jsonify({"email": f"{email}",
-                        "reset_token":
-                            f"{AUTH.get_reset_password_token(email)}"}), 200
-    abort(403)
+    try:
+        token = AUTH.get_reset_password_token(email)
+        return jsonify({"email": f"{email}", "reset_token": f"{token}"}), 200
+    except ValueError:
+        abort(403)
 
 
 if __name__ == "__main__":
