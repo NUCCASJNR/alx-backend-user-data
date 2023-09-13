@@ -64,12 +64,11 @@ def logout_user() -> str:
         redirect to the '/' route
     """
     session_id = request.cookies['session_id']
-    if session_id:
-        find_user = AUTH.get_user_from_session_id(session_id)
-        if find_user:
-            AUTH.destroy_session(find_user)
-            return redirect('/')
-        abort(403)
+    find_user = AUTH.get_user_from_session_id(session_id)
+    if find_user:
+        AUTH.destroy_session(find_user)
+        return redirect('/')
+    abort(403)
 
 
 if __name__ == "__main__":
