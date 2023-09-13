@@ -42,3 +42,4 @@ try:
     print(f"Reset token generated: {reset_token}")
 except ValueError as e:
     print(f"Error: {e}")
+auth.update_password(user.reset_token, user.hashed_password)
