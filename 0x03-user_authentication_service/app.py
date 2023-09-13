@@ -5,7 +5,7 @@ Flask App
 """
 
 from flask import (
-    abort, Flask, jsonify, redirect, request, Response, url_for
+    abort, Flask, jsonify, redirect, request, Response
 )
 from auth import Auth, NoResultFound
 app = Flask(__name__)
