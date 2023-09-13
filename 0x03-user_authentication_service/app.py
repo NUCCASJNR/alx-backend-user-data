@@ -87,5 +87,22 @@ def view_profile():
     return jsonify({"email": f"{user.email}"}), 200
 
 
+@app.route('/reset_password', methods=['POST'], strict_slashes=False)
+def get_reset_password_token():
+    """
+    reset user pwd
+    :return:
+        message
+    """
+    email = request.form.get('email')
+    pwd = request.form.get('password')
+    if AUTH.register_user(email, pwd):
+        AUTH.get_reset_password_token(email)
+        return jsonify({"email": f"{email}",
+                        "reset_token":
+                            f"{AUTH.get_reset_password_token(email)}"}), 200
+    abort(403)
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000", debug=True)
