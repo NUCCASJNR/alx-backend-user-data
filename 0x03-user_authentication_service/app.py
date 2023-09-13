@@ -67,10 +67,10 @@ def logout_user() -> Response:
     """
     session_id = request.cookies['session_id']
     find_user = AUTH.get_user_from_session_id(session_id)
-    if find_user:
-        AUTH.destroy_session(find_user)
-        return redirect('/')
-    abort(403)
+    if not find_user:
+        abort(403)
+    AUTH.destroy_session(find_user)
+    return redirect('/')
 
 
 if __name__ == "__main__":
