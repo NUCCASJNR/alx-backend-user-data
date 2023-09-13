@@ -142,10 +142,10 @@ class Auth:
         """
         try:
             token = self._db.find_user_by(reset_token=reset_token)
+            if not token:
+                raise ValueError
             hashed_pwd = _hash_password(password)
             self._db.update_user(token.id, password=hashed_pwd,
                                  reset_token=None)
-            if not token:
-                return None
         except Exception:
             raise ValueError
