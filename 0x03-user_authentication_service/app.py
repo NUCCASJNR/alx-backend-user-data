@@ -5,9 +5,9 @@ Flask App
 """
 
 from flask import (
-    abort, Flask, jsonify, request, Response
+    abort, Flask, jsonify, redirect, request, Response, url_for
 )
-from auth import Auth
+from auth import Auth, NoResultFound
 app = Flask(__name__)
 AUTH = Auth()
 
@@ -54,6 +54,22 @@ def login_user():
         resp.set_cookie("session_id", created_id)
         return resp
     abort(401)
+
+
+@app.route('/sessions', methods=['DELETE'], strict_slashes=False)
+def logout_user():
+    """
+    LOgs out a user
+    :return:
+        redirect to the '/' route
+    """
+    session_id = request.form['session_id']
+    if session_id:
+        find_user = AUTH.get_user_from_session_id(session_id)
+        if find_user:
+            AUTH.destroy_session(find_user)
+            return redirect('/')
+        abort(403)
 
 
 if __name__ == "__main__":

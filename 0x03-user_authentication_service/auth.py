@@ -6,9 +6,7 @@ Authentication module
 
 import bcrypt
 
-from db import DB
-from user import User
-from sqlalchemy.orm.exc import NoResultFound
+from db import DB, User, NoResultFound
 import uuid
 
 
@@ -107,11 +105,11 @@ class Auth:
         Destroys a user session
         :param user_id: User_id that the session would be destroyed
         :return:
-        None
+            None
         """
         if not user_id:
             return None
         try:
             self._db.update_user(user_id, session_id=None)
-        except NoResultFound:
+        except ValueError:
             return None
