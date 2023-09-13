@@ -7,6 +7,8 @@ Flask App
 from flask import (
     abort, Flask, jsonify, redirect, request, Response
 )
+from werkzeug import Response
+
 from auth import Auth
 app = Flask(__name__)
 AUTH = Auth()
@@ -57,7 +59,7 @@ def login_user():
 
 
 @app.route('/sessions', methods=['DELETE'], strict_slashes=False)
-def logout_user() -> str:
+def logout_user() -> Response:
     """
     LOgs out a user
     :return:
