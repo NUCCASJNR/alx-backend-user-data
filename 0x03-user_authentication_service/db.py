@@ -80,5 +80,5 @@ class DB:
                     raise ValueError
             self._session.commit()
             return None
-        except Exception:
+        except ValueError:
             raise ValueError
