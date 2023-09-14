@@ -5,7 +5,7 @@ Flask App
 """
 
 from flask import (
-    abort, Flask, jsonify, redirect, request, Response
+    abort, Flask, jsonify, redirect, request
 )
 from werkzeug import Response
 

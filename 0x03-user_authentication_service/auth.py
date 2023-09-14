@@ -77,10 +77,11 @@ class Auth:
         """create a session for a user"""
         try:
             user = self._db.find_user_by(email=email)
-            user.session_id = _generate_uuid()
-            return user.session_id
+            session_id = _generate_uuid()
+            user.session_id = session_id
+            return session_id
         except NoResultFound:
-            return None
+            raise NoResultFound
 
     def get_user_from_session_id(self, session_id: str) -> User:
         """
