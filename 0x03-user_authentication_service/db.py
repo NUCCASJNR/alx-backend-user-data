@@ -57,8 +57,8 @@ class DB:
         """
         if not kwargs:
             raise InvalidRequestError
-        user = self._session.query(User).filter_by(**kwargs)
         try:
+            user = self._session.query(User).filter_by(**kwargs)
             query = user.first()
             return query
         except Exception:
