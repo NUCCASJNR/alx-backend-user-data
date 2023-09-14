@@ -57,12 +57,11 @@ class DB:
         """
         if not kwargs:
             raise InvalidRequestError
-        try:
-            user = self._session.query(User).filter_by(**kwargs)
-            query = user.first()
-            return query
-        except Exception:
+        user = self._session.query(User).filter_by(**kwargs)
+        query = user.first()
+        if not query:
             raise NoResultFound
+        return query
 
     def update_user(self, user_id: int, **kwargs) -> None:
         """
