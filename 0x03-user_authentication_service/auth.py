@@ -81,7 +81,7 @@ class Auth:
             self._db._session.commit()
             return user.session_id
         except NoResultFound:
-            return
+            return None
 
     def get_user_from_session_id(self, session_id: str) -> User:
         """
