@@ -6,7 +6,8 @@ Authentication module
 
 import bcrypt
 
-from db import DB, User
+from db import DB
+from user import User
 from sqlalchemy.orm.exc import NoResultFound
 import uuid
 
