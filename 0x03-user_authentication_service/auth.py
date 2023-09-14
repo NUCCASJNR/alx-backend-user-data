@@ -19,7 +19,7 @@ def _hash_password(password: str) -> bytes:
     :return:
         The hashed password
     """
-    salt = bcrypt.gensalt(rounds=12)
+    salt = bcrypt.gensalt()
     hashed_pwd = bcrypt.hashpw(password.encode('utf-8'), salt)
     return hashed_pwd
 
